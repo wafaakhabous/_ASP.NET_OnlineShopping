@@ -1,0 +1,52 @@
+﻿@page
+@model ModelAsp1.Pages.Products.IndexModel
+
+@{
+    ViewData["Title"] = "Product Index";
+}
+<h1 class="text-center mt-4">Product Index</h1>
+
+<div class="text-center mt-4">
+    <a asp-page="Create" class="btn btn-success btn-lg">Create New Product</a>
+</div>
+
+<form class="form-inline mb-4 mt-4">
+    <div class="form-group mr-2">
+        <label for="searchString" class="mr-2">Product Name:</label>
+        <input type="text" id="searchString" name="SearchString" class="form-control" placeholder="Enter product name" value="@Model.SearchString" />
+    </div>
+    <div class="form-group mr-2">
+        <label for="productGenre" class="mr-2">Product Genre:</label>
+        <select id="productGenre" name="ProductGenre" asp-items="Model.Genres" class="form-control">
+            <option value="">All</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Filter</button>
+</form>
+
+<div class="container mt-4">
+    <div class="row">
+        @foreach (var item in Model.Product)
+        {
+            <div class="col-md-3 mb-4">
+                <div class="card">
+                    <img src="@item.imageUrl" class="card-img-top" alt="Product Image" style="max-width: 100%;" />
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Title</h5>
+                        <p class="card-text">
+                            <strong>Release Date:</strong> @item.ReleaseDate <br />
+                            <strong>Genre:</strong> @item.Genre <br />
+                            <strong>Price:</strong> @item.Price <br />
+                            <strong>Quantity:</strong> @item.Quantity
+                        </p>
+                        <div class="text-center">
+                            <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-primary btn-sm">Edit</a>
+                            <a asp-page="./Details" asp-route-id="@item.Id" class="btn btn-info btn-sm ml-2">Details</a>
+                            <a asp-page="./Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm ml-2">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
