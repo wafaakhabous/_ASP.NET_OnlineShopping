@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ModelAsp1.Data;
 using ModelAsp1.Models;
-
+using ModelAsp1.Extensions;
 namespace ModelAsp1.Pages.Products
 {
     public class IndexModel : PageModel
@@ -52,6 +53,21 @@ namespace ModelAsp1.Pages.Products
             Genres = new SelectList(await genreQuery.Distinct().ToListAsync());
 
             Product = await products.ToListAsync();
+        }
+        public async Task<IActionResult> OnPostAddToCartAsync(int id, int quantity)
+        {
+            var product = await _context.Product.FindAsync(id);
+
+            if (product == null)//si produit n'existe pas
+            {
+                return NotFound();
+            }
+
+            ShoppingCart cart = HttpContext.Session.Get<ShoppingCart>("ShoppingCart") ?? new ShoppingCart();
+            cart.AddItem(product, quantity);
+            HttpContext.Session.Set("ShoppingCart", cart);
+
+            return RedirectToPage("Index");
         }
     }
 }

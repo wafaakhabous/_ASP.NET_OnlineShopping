@@ -30,28 +30,26 @@ namespace ModelAsp1.Pages.Products
 
         [BindProperty]
         public IFormFile ImageFile { get; set; }
-        // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
             if (ImageFile != null && ImageFile.Length > 0)
             {
-                // Generate a unique filename using a timestamp
-                var fileName = DateTime.Now.Ticks + Path.GetExtension(ImageFile.FileName);
+                
+                var fileName = DateTime.Now.Ticks + Path.GetExtension(ImageFile.FileName);// Generate a unique filename using a timestamp
 
                 var uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "images");
                 var filePath = Path.Combine(uploadsFolder, fileName);
 
-                // Ensure the uploads folder exists
                 Directory.CreateDirectory(uploadsFolder);
+                // si images n'existe pas on le cree dans wwwwrooot
 
-                // Save the file to the server
-                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                
+                using (var fileStream = new FileStream(filePath, FileMode.Create))     //enregistrer dans webroot
                 {
-                    await ImageFile.CopyToAsync(fileStream);
+                    await ImageFile.CopyToAsync(fileStream); //copy.. the file in thetarget file 
                 }
 
-                // Save the file path in your database
-                Product.imageUrl = "/images/" + fileName; // Update the path as per your project structure
+                Product.imageUrl = "/images/" + fileName;// enregistrer dans la base de doonnnees
             }
                 _context.Product.Add(Product);
             await _context.SaveChangesAsync();
