@@ -4,62 +4,236 @@
 @{
     ViewData["Title"] = "Index";
 }
-<h1 class="text-center mt-4">Prducts</h1>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/home.css" />
+    <link rel="stylesheet" href="/css/responsive.css" />
 
-<div class="text-center mt-4">
-    <a asp-page="Create" class="btn btn-success btn-lg">Create New Product</a>
-</div>
+    <style> 
+        .button-11 {
+             
+            font-family: -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+            border-radius: 6px;
+            color: #3D3D3D;
+            background: #fff;
+            border: none;
+            box-shadow: 0px 0.5px 1px rgba(0, 0, 0, 0.1);
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+        }
 
-<form class="form-inline mb-4 mt-4">
-    <div class="form-group mr-2">
-        <label for="searchString" class="mr-2">Product Name:</label>
-        <input type="text" id="searchString" name="SearchString" class="form-control" placeholder="Enter product name" value="@Model.SearchString" />
+        .button-11:focus {
+            box-shadow: 0px 0.5px 1px rgba(0, 0, 0, 0.1), 0px 0px 0px 3.5px rgba(58, 108, 217, 0.5);
+            outline: 0;
+        } 
+        .button-45 {
+            align-items: center;
+            background-color: #FFE7E7;
+            background-position: 0 0;
+            border: 1px solid #FEE0E0;
+            border-radius: 11px;
+            box-sizing: border-box;
+            color: #D33A2C;
+            cursor: pointer;
+            display: flex;
+            font-size: 1rem;
+            font-weight: 700;
+            line-height: 33.4929px;
+            list-style: outside url(https://www.smashingmagazine.com/images/bullet.svg) none;
+            padding: 2px 12px;
+            text-align: left;
+            text-decoration: none;
+            text-shadow: none;
+            text-underline-offset: 1px;
+            transition: border .2s ease-in-out,box-shadow .2s ease-in-out;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            white-space: nowrap;
+            word-break: break-word;
+        }
+
+        .button-45:active,
+        .button-45:hover,
+        .button-45:focus {
+            outline: 0;
+        }
+
+
+        .button-45:active {
+            background-color: #D33A2C;
+            box-shadow: rgba(0, 0, 0, 0.12) 0 1px 3px 0 inset;
+            color: #FFFFFF;
+        }
+
+        .button-45:hover {
+            background-color: #FFE3E3;
+            border-color: #FAA4A4;
+        }
+
+        .button-45:active:hover,
+        .button-45:focus:hover,
+        .button-45:focus {
+            background-color: #D33A2C;
+            box-shadow: rgba(0, 0, 0, 0.12) 0 1px 3px 0 inset;
+            color: #FFFFFF;
+        }
+
+
+
+        .button-4 {
+            align-items: center;
+            background-color: #FFE7E7;
+            background-position: 0 0;
+            border: 1px solid #FEE0E0;
+            border-radius: 11px;
+            box-sizing: border-box;
+            color: #2c5777;
+            cursor: pointer;
+            display: flex;
+            font-size: 1rem;
+            font-weight: 700;
+            line-height: 33.4929px;
+            list-style: outside url(https://www.smashingmagazine.com/images/bullet.svg) none;
+            padding: 2px 12px;
+            text-align: left;
+            text-decoration: none;
+            text-shadow: none;
+            text-underline-offset: 1px;
+            transition: border .2s ease-in-out,box-shadow .2s ease-in-out;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            white-space: nowrap;
+            word-break: break-word;
+        }
+
+            .button-4:active,
+            .button-4:hover,
+            .button-4:focus {
+                outline: 0;
+            }
+
+
+            .button-4:active {
+                background-color: #b3d3ea;
+                box-shadow: rgba(0, 0, 0, 0.12) 0 1px 3px 0 inset;
+                color: #2c5777;
+            }
+
+            .button-4:hover {
+                background-color: #FFE3E3;
+                border-color: #2c5777;
+            }
+
+            .button-4:active:hover,
+            .button-4:focus:hover,
+            .button-4:focus {
+                background-color: #b3d3ea;
+                box-shadow: rgba(0, 0, 0, 0.12) 0 1px 3px 0 inset;
+                color: #2c5777;
+            }
+    </style>
+</head>
+
+ <header class="header_section">
+      <div class="container">
+        <nav class="navbar navbar-expand-lg custom_nav-container ">
+          <a class="navbar-brand" href="index.html">
+            <img src="images/logo.png" alt="">
+            <span>
+              Style
+            </span>
+          </a>
+         
+
+            <div class="d-flex   flex-column flex-lg-row  ">
+              <ul class="navbar-nav  ">
+                <li class="nav-item active">
+                  <a class="nav-link" href="/Index">Home </a>
+                </li>
+                <li class="nav-item">
+                            <a class="nav-link" asp-page="Create"> Add Product </a>
+                </li>
+                <li class="nav-item">
+                            <a class="nav-link" asp-page="./Cart"> Cart </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href=" "> Blog </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href=" ">Profie </a>
+                </li></ul> 
+                </div>  
+          
+        </nav>
     </div>
-    <div class="form-group mr-2">
-        <label for="productGenre" class="mr-2">Product Genre:</label>
-        <select id="productGenre" name="ProductGenre" asp-items="Model.Genres" class="form-control">
+    
+    </header>
+
+<div style=" margin-left:700px;">
+    <form class="form-inline">
+        <input type="text" style="width: 60%; border: none; border-bottom: 1px solid #ccc;" id="searchString" name="SearchString" placeholder="Search a product..." value="@Model.SearchString" />
+        <button type="submit" class="button-11" style="width: 20%;">Filter</button>
+
+        <select id="productGenre" style="width: 20%;" name="ProductGenre" asp-items="Model.Genres">
             <option value="">All</option>
         </select>
-    </div>
-    <button type="submit" class="btn btn-primary">Filter</button>
-</form>
-<a asp-page="./Cart" class="btn btn-primary btn-sm">My Cart</a>
+    </form>
 
-
-<div class="container mt-4">
+</div>
+<br />
+<br />
+<br />
+<div>
     <div class="row">
         @foreach (var item in Model.Product)
         {
             <div class="col-md-3 mb-4">
-                <div class="card">
+                <div class="card h-100">
                     <img src="@item.imageUrl" class="card-img-top" alt="Product Image" style="max-width: 100%;" />
-                    <div class="card-body">
-                        <h5 class="card-title">@item.Title</h5>
-                        <p class="card-text">
-                            <strong>Release Date:</strong> @item.ReleaseDate <br />
-                            <strong>Genre:</strong> @item.Genre <br />
-                            <strong>Price:</strong> @item.Price <br />
-                            <strong>Quantity:</strong> @item.Quantity
-                        </p>
-                        <div class="text-center">
-                            <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-primary btn-sm">Edit</a>
-                            <a asp-page="./Details" asp-route-id="@item.Id" class="btn btn-info btn-sm ml-2">Details</a>
-                            <a asp-page="./Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm ml-2">Delete</a>
+                    <div class="card-body d-flex flex-column">
+                        <div class="d-flex justify-content-between">
+                            <h5 class="card-title" style="font-family:  'Poppins', sans-serif;">@item.Title</h5>
+                            <p class="card-text"><strong>@item.Price</strong></p>
                         </div>
-                        <div class="text-center mt-2">
+                        <div class="d-flex justify-content-between mt-auto">
+                            <a asp-page="./Edit" asp-route-id="@item.Id" class="button-45" style="background-color: #D0E7D2;  color: #618264;  ">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                                
+                            </a>
+                            <a asp-page="./Details" asp-route-id="@item.Id" class="button-45" style="background-color:#F1EFEF ;  color: #713ABE;  ">
+                                <i class="fa-solid fa-circle-info"></i>
+                                
+                            </a>
+                            <a asp-page="./Delete" asp-route-id="@item.Id" class="button-45">
+                                <i class="fa-solid fa-trash"></i>      
+                            </a>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 2rem;">
                             <form method="post" asp-page-handler="AddToCart" asp-route-id="@item.Id" class="form-inline">
-                                <div class="form-group">
-                                    <label for="quantity" class="sr-only">Quantity:</label>
-                                    <input type="number" id="quantity" name="quantity" class="form-control" value="1" min="1" />
+                                <div style="display: flex; align-items: center;">
+                                    <input type="number" id="quantity" style="width: 60px; border:none; " name="quantity"   value="1" min="1" />
+                                    <button type="submit" class="button-45" style="margin-left: 0.5rem; background-color:#FEFCF3 ;  color: #DBA39A;">
+                                        Add to cart  <i class="fas fa-shopping-cart"></i>
+                                    </button>
                                 </div>
-                                <button type="submit" class="btn btn-success btn-sm ml-2">Add to Cart</button>
                             </form>
                         </div>
-                      
+
+
+
                     </div>
                 </div>
             </div>
-            
         }
     </div>
 </div>
+
+
+ 
